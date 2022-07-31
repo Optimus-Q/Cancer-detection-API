@@ -29,7 +29,11 @@ def predict():
     features = [float(x) for x in request.form.values()]
     array_features = np.array([np.array(features)]).reshape(1,-1)
     prediction = model.predict(array_features)
-    output = prediction[0][0]
+    output = prediction[0]
+    if output==1:
+        output="Malignant"
+    else:
+        output="Benign"
     return render_template('index.html', prediction_text='The predicted demand in rented bikes is {}'.format(output))
 
 
